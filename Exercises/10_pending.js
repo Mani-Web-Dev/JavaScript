@@ -4,12 +4,7 @@ var a = 50;
 var b = 10;
 var c = 30;
 
-if (a < b) {
-    console.log(a);
-    if (b < c) {
-        console.log(b)
-    }
-}
+var num1, num2, num3
 
 
-
+console.log(num2)
