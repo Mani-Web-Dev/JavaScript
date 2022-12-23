@@ -7,3 +7,5 @@ if (number % 3 === 0) {
 } else {
     console.log("The number is not divisible by three");
 }
+
+// this is file two

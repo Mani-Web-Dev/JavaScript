@@ -7,3 +7,5 @@ if (number % 7 === 0) {
 } else {
     console.log("The number is not divisible by seven");
 }
+
+// this is file 1
