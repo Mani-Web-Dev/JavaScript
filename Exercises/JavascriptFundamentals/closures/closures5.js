@@ -19,3 +19,5 @@ function buildFunctions() {
 
 var fs = buildFunctions();
 
+// here we dont need to call the fs function because it is IIFE
+
