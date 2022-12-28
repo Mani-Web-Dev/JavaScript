@@ -1,0 +1,70 @@
+Object Oriented Javascript Prototypal Inheritance
+-------------------------------------------------
+
+INHERITANCE : Once object gets access to the properties and methods of the other object
+
+
+Classical Inheritance:
+
+Classical Inheritance is a mechanism in which one class can extend the methods of another class.
+
+Key Ideas:
+
+Classes may inherit from other classes.
+Objects are created from classes.
+Classes are immutable they can not be modified at runtime.
+Classes my or may not support multiple inheritance (depending on the language).
+
+----------------------------------------------------------------
+
+Example (Java):
+
+class Animal {
+  private name;
+  public Animal(String name) {
+    this.name = name;
+  }
+  public String getName() {
+    return this.name;
+  }
+}
+
+class Dog extends Animal {
+  
+}
+
+Dog dog = new Dog("Rex");
+
+----------------------------------------------------------------
+
+Prototypal Inheritance
+
+Prototypal Inheritance is a mechanism in which an object (or a function constructor) can extend methods of another object. Every object has a prototype which is a link the parent object, this structure is called prototype chain.
+
+Key ideas:
+
+Objects can be created from function constructors, using Object.create method or defined as object literal ({}).
+Prototypes can be changed at runtime.
+Objects can inherit from multiple prototypes.
+
+
+----------------------------------------------------------------
+Example (JavaScript):
+
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.getName() {
+  return this.name;
+}
+
+funciton Dog(name) {
+  Animal.call(this, name);
+}
+
+Dog.prototype = Object.create(Animal.prototype);
+
+const dog = new Dog("Rex");
+
+----------------------------------------------------------------
