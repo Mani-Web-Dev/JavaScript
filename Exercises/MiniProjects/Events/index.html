@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events in Javascript</title>
+    <link rel="stylesheet" href="./events.css">
+</head>
+
+<body>
+    <div class="button-wrapper">
+        <ul>
+            <li>
+                <h2>OnMouseOver</h2>
+                <p>Mouse over on the button to change the background color</p>
+                <button class="button" onmouseover="this.style.background='#000';this.style.color='#fff'">
+                    OnMouseOver
+                </button>
+            </li>
+            <li>
+                <h2>OnMouseOut</h2>
+                <p>Hover on the button and move the cursor away</p>
+                <button class="button"
+                    onmouseout="this.style.background='#000';this.style.color='#fff'">OnMouseOut</button>
+            </li>
+            <li>
+                <h2>OnClick</h2>
+                <p>The event gets triggered when a button is clicked</p>
+                <button class="button" onclick="alert('You clicked a button')">OnClick</button>
+            </li>
+            <li>
+                <h2>OnDoubleClick</h2>
+                <p>This event gets triggerd when the button is double clicked</p>
+                <button class="button" ondblclick="alert('You double clicked a button')">OnDoubleClick</button>
+            </li>
+            <li>
+                <h2>OnFocus</h2>
+                <p>This event gets triggered when the text input is in focused state</p>
+                <input type="text" class="input" onfocus="alert('you focused a text input')">
+            </li>
+            <li>
+                <h2>OnBlur</h2>
+                <p>This event is triggered when you type something and click anywhere outside the text box (when the
+                    input looses the focus)</p>
+                <input type="text" class="input blurInput" onblur="this.value = this.value.toUpperCase();">
+            </li>
+        </ul>
+    </div>
+    <script src="./events.js"></script>
+</body>
+
+</html>
