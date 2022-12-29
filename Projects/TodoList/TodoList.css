@@ -55,6 +55,7 @@ body {
     flex: 1;
     background: whitesmoke;
     padding: 17px;
+    overflow: scroll;
 }
 
 .list li {
