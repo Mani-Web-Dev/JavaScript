@@ -7,6 +7,7 @@ var ce = document.querySelector(".CE");
 var backspace = document.querySelector(".backspace");
 var equals = document.querySelector(".equals");
 
+
 for (button of buttons) {
     button.addEventListener("click", (event) => {
         event.target.className === "button" ?
@@ -21,7 +22,7 @@ ce.addEventListener("click", () => {
 );
 backspace.addEventListener("click", () => {
     var strArray = input.innerHTML.split("");
-    strArray.pop()
+    strArray.pop();
     input.innerHTML = strArray.join("");
 })
 

@@ -27,7 +27,9 @@ body {
   width: 300px;
 }
 .calc-wrapper .calc-input {
+  min-height: 41px;
   width: 100%;
+  outline: none;
   padding: 0px 10px;
   border: 0;
   background: transparent;
@@ -42,13 +44,13 @@ body {
   background: transparent;
   font-size: 29px;
   text-align: right;
+  pointer-events: none;
 }
 
 .calc-wrapper .output {
   background: #dbdbdb;
   margin-bottom: 15px;
   border-radius: 5px;
-  pointer-events: none;
 }
 
 .button-grid-flex {
