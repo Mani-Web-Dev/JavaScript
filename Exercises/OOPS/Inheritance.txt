@@ -68,3 +68,5 @@ Dog.prototype = Object.create(Animal.prototype);
 const dog = new Dog("Rex");
 
 ----------------------------------------------------------------
+
+
