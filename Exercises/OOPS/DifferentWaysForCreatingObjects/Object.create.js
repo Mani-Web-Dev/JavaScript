@@ -1,0 +1,2 @@
+// Object Pure Porotypal inheritance
+
