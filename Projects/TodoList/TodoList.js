@@ -3,78 +3,47 @@ var textInput = document.querySelector("#textInput");
 var listData = document.querySelector("#listData");
 var noData = document.querySelector(".no-data");
 
-function listItemHTML(task, id) {
-    return `
-        <li id="list-item-${id + 1}">
-            <span><span class="index">${id + 1}. </span>${task}</span>
-            <button class="list-button edit" onclick=""><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-            <button class="list-button delete" onclick=""><i class="fa-solid fa-trash-can"></i> Delete</button>
-        </li>
-        `
-}
-
 
 // On submitting the form
 
-var inputVal;
-
-textInput.addEventListener("change", (e) => {
-    inputVal = e.target.value;
-});
+var listArray = ["item 1", "item 2", "item 3", "item 4", "item 5"];
+var underProgress = [];
+var completed = [];
 
 
+function displayData(arr) {
+    arr.map(function (item, index) {
 
+        var li = document.createElement("li");
+        li.id = "list-item" + index;
 
+        var span = document.createElement('span');
+        span.textContent = index + 1 + ") " + item;
 
+        li.appendChild(span);
+        listData.appendChild(li);
 
+        var editButton = document.createElement("button");
+        editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Edit`;
+        editButton.className = "list-button edit";
 
-todoForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i> Delete`;
+        deleteButton.className = "list-button delete";
 
-
-    localStorage.setItem("todoList", function () {
-        return inputVal;
-    }());
-
-    console.log(todoList)
-
-    textInput.value = "";
-})
-
-
-
-
-// Reading the array object form the local storage database
-
-function displayData() {
-    if (todoList.length === 0 || todoList[0] == "") {
-        listData.innerHTML = `<p class="no-data">You haven't created any tasks yet</p>`
-    } else {
-        todoList.map(function (item, index) {
-            listData.innerHTML += listItemHTML(item, index);
-        })
-    }
+        li.appendChild(editButton);
+        li.appendChild(deleteButton);
+    })
 }
-displayData();
+
+displayData(listArray);
 
 
-function createData() {
-    console.log("createData");
+function createData(arr) {
+    arr.push("item 6");
+    return arr;
 }
-createData();
 
+createData(listArray);
 
-function readData() {
-    console.log("readData");
-}
-readData();
-
-
-function deleteData() {
-    console.log("deleteData");
-}
-deleteData();
-
-
-
-
+console.log(listArray);
