@@ -763,17 +763,14 @@ prev.addEventListener("click", () => {
     updateList(employees);
 });
 
-for (var i = 1; i <= paginationCount; i++) {
+for (var i = 1; i <= paginationCount - 1; i++) {
     var index = document.createElement("button");
     index.className = "pagination-index";
     index.innerText = i;
-    pagination.appendChild(index)
+    pagination.appendChild(index);
+
     index.addEventListener("click", (event) => {
         currentPage = Number(event.target.innerHTML);
-
-        if (Number(event.target.innerHTML) === currentPage) {
-            event.target.className = 'pagination-index active';
-        }
         updateList(employees);
     });
 }
