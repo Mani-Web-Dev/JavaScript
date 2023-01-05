@@ -718,14 +718,15 @@ var paginationCount = employees.length / 20;
 var pagination = document.querySelector("#pagination");
 console.log(pagination);
 
-var currentPage = 3;
+var currentPage = 1;
 
-var itemRange = currentPage * 20;
-
-function updateList(num, arr) {
+function updateList(arr) {
+    console.log("current page=" + currentPage);
+    var itemRange = currentPage * 20;
+    console.log(itemRange);
     employeeTable.innerHTML = "";
-    if (num == 20) {
-        for (var i = 0; i < num; i++) {
+    if (itemRange == 20 || currentPage == 1) {
+        for (var i = 0; i < itemRange; i++) {
             rows = `
             <tr>
                 <td>${arr[i].id}</td>
@@ -735,8 +736,8 @@ function updateList(num, arr) {
             </tr > `;
             employeeTable.innerHTML += rows;
         }
-    } else if (num > 20) {
-        for (var i = num; i <= num + 20 - 1; i++) {
+    } else if (itemRange > 20) {
+        for (var i = itemRange; i <= itemRange + 20 - 1; i++) {
             rows = `
             <tr>
                 <td>${arr[i].id}</td>
@@ -748,6 +749,7 @@ function updateList(num, arr) {
         }
     }
 }
+updateList(employees);
 
 var prev = document.createElement("button");
 prev.className = "nav prev-button";
@@ -758,6 +760,7 @@ prev.addEventListener("click", () => {
     if (currentPage >= 1) {
         currentPage -= 1;
     }
+    updateList(employees);
 });
 
 for (var i = 1; i <= paginationCount; i++) {
@@ -767,8 +770,7 @@ for (var i = 1; i <= paginationCount; i++) {
     pagination.appendChild(index)
     index.addEventListener("click", (event) => {
         currentPage = Number(event.target.innerHTML);
-        console.log(currentPage);
-        updateList(itemRange, employees);
+        updateList(employees);
     });
 }
 
@@ -778,6 +780,7 @@ next.textContent = "Next";
 pagination.appendChild(next);
 next.addEventListener("click", () => {
     currentPage += 1;
+    updateList(employees);
 });
 
 
