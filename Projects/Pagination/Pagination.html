@@ -11,20 +11,31 @@
 </head>
 
 <body>
-    <table class="emp-table">
-        <thead>
-            <tr>
-                <th>Employee ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Company URL</th>
-            </tr>
-        </thead>
-        <tbody id="employeeTable">
-
-        </tbody>
-    </table>
+    <div class="parent-flex">
+        <div class="table-wrapper">
+            <table class="emp-table">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTable">
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination" id="pagination">
+            <!-- <button class="nav prev-button">Next</button>
+            <button class="pagination-index">1</button>
+            <button class="pagination-index">2</button>
+            <button class="pagination-index">3</button>
+            <button class="pagination-index">4</button>
+            <button class="pagination-index">5</button>
+            <button class="nav next-button">Prev</button> -->
+        </div>
+    </div>
 
     <script src="./data.js"></script>
     <script src="./Pagination.js"></script>

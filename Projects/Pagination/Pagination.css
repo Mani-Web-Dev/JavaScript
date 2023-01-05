@@ -4,8 +4,17 @@
   font-family: calibri;
 }
 
+html,
 body {
-  padding: 25px;
+  height: 100%;
+}
+
+.parent-flex {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+body {
   background: gainsboro;
 }
 
@@ -30,4 +39,34 @@ body {
 }
 .emp-table tr:nth-child(even) td {
   background: gainsboro;
+}
+
+.table-wrapper {
+  flex: 1;
+  overflow: auto;
+  padding: 25px;
+}
+
+.pagination {
+  padding: 17px;
+  text-align: right;
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.pagination button {
+  padding: 5px;
+  background: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button:hover,
+.pagination button.active {
+  background: #000;
+  color: #fff;
+  cursor: pointer;
 }

@@ -711,74 +711,28 @@ employeeTable.innerHTML = `
     <td colspan="4">No Data</td>
 </tr>`;
 
-// create pagination HTML blocks
 
-var paginationCount = employees.length / 20;
 
-var pagination = document.querySelector("#pagination");
-console.log(pagination);
-
-var currentPage = 3;
-
-var itemRange = currentPage * 20;
-
-function updateList(num, arr) {
+function displayData(arr) {
     employeeTable.innerHTML = "";
-    if (num == 20) {
-        for (var i = 0; i < num; i++) {
-            rows = `
+
+    arr.map((employee) => {
+
+        var companyUrl = employee.email;
+        var subDomain = companyUrl.split(".")[1];
+        var companyName = companyUrl.split(".")[0].split("@")[1];
+
+        rows = `
             <tr>
-                <td>${arr[i].id}</td>
-                <td>${arr[i].first_name + arr[i].last_name}</td>
-                <td>${arr[i].email}</td>
-                <td>${arr[i].gender}</td>
+                <td>${employee.id}</td>
+                <td>${employee.first_name + employee.last_name}</td>
+                <td>${employee.email}</td>
+                <td>${employee.gender}</td>
+                <td><a href="http://${companyName + "." + subDomain}" target="_blank" style="text-decortion:underline">Visit Company URL</td>
             </tr > `;
-            employeeTable.innerHTML += rows;
-        }
-    } else if (num > 20) {
-        for (var i = num; i <= num + 20 - 1; i++) {
-            rows = `
-            <tr>
-                <td>${arr[i].id}</td>
-                <td>${arr[i].first_name + arr[i].last_name}</td>
-                <td>${arr[i].email}</td>
-                <td>${arr[i].gender}</td>
-            </tr > `;
-            employeeTable.innerHTML += rows;
-        }
-    }
-}
 
-var prev = document.createElement("button");
-prev.className = "nav prev-button";
-prev.textContent = "Prev";
-pagination.appendChild(prev)
-
-prev.addEventListener("click", () => {
-    if (currentPage >= 1) {
-        currentPage -= 1;
-    }
-});
-
-for (var i = 1; i <= paginationCount; i++) {
-    var index = document.createElement("button");
-    index.className = "pagination-index";
-    index.innerText = i;
-    pagination.appendChild(index)
-    index.addEventListener("click", (event) => {
-        currentPage = Number(event.target.innerHTML);
-        console.log(currentPage);
-        updateList(itemRange, employees);
+        employeeTable.innerHTML += rows;
     });
 }
 
-var next = document.createElement("button");
-next.className = "nav next-button";
-next.textContent = "Next";
-pagination.appendChild(next);
-next.addEventListener("click", () => {
-    currentPage += 1;
-});
-
-
-
+displayData(employees);
