@@ -770,6 +770,10 @@ for (var i = 1; i <= paginationCount; i++) {
     pagination.appendChild(index)
     index.addEventListener("click", (event) => {
         currentPage = Number(event.target.innerHTML);
+
+        if (Number(event.target.innerHTML) === currentPage) {
+            event.target.className = 'pagination-index active';
+        }
         updateList(employees);
     });
 }
