@@ -721,7 +721,6 @@ console.log(pagination);
 var currentPage = 1;
 
 function updateList(arr) {
-    console.log("current page=" + currentPage);
     var itemRange = currentPage * 20;
     console.log(itemRange);
     employeeTable.innerHTML = "";
@@ -772,6 +771,17 @@ for (var i = 1; i <= paginationCount - 1; i++) {
     index.addEventListener("click", (event) => {
         currentPage = Number(event.target.innerHTML);
         updateList(employees);
+
+
+        var pageIndexes = document.querySelectorAll(".pagination-index");
+
+        pageIndexes.forEach((index) => {
+            if (currentPage == Number(index.innerHTML)) {
+                index.classList.add("active")
+            } else {
+                index.classList.remove("active")
+            }
+        })
     });
 }
 
