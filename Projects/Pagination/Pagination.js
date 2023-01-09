@@ -1,6 +1,7 @@
 
 var employeeTable = document.getElementById("employeeTable");
 
+
 var rows = "";
 
 var employees = [
@@ -748,50 +749,59 @@ function updateList(arr) {
         }
     }
 }
-updateList(employees);
+var getTableData = updateList.bind(this, employees);
+
+getTableData();
 
 var prev = document.createElement("button");
 prev.className = "nav prev-button";
 prev.textContent = "Prev";
 pagination.appendChild(prev)
 
-prev.addEventListener("click", () => {
-    if (currentPage >= 1) {
-        currentPage -= 1;
-    }
-    updateList(employees);
-});
 
 for (var i = 1; i <= paginationCount - 1; i++) {
     var index = document.createElement("button");
     index.className = "pagination-index";
     index.innerText = i;
+    index.id = "item-" + i;
     pagination.appendChild(index);
 
     index.addEventListener("click", (event) => {
         currentPage = Number(event.target.innerHTML);
         updateList(employees);
 
-
         var pageIndexes = document.querySelectorAll(".pagination-index");
-
         pageIndexes.forEach((index) => {
             if (currentPage == Number(index.innerHTML)) {
                 index.classList.add("active")
             } else {
                 index.classList.remove("active")
             }
-        })
+        });
     });
 }
+
 
 var next = document.createElement("button");
 next.className = "nav next-button";
 next.textContent = "Next";
 pagination.appendChild(next);
+
+
+prev.addEventListener("click", () => {
+    if (currentPage >= 1) {
+        currentPage -= 1;
+    }
+    let idIndex = document.getElementById("item-" + currentPage);
+    idIndex.click();
+    getTableData();
+});
+
 next.addEventListener("click", () => {
     currentPage += 1;
     updateList(employees);
+    let idIndex = document.getElementById("item-" + currentPage);
+    idIndex.click();
 });
 
 
