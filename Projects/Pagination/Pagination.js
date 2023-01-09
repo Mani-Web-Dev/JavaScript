@@ -714,16 +714,18 @@ employeeTable.innerHTML = `
 
 // create pagination HTML blocks
 
+var currentPage = 1;
+
+
 var paginationCount = employees.length / 20;
 
 var pagination = document.querySelector("#pagination");
 console.log(pagination);
 
-var currentPage = 1;
+
 
 function updateList(arr) {
     var itemRange = currentPage * 20;
-    console.log(itemRange);
     employeeTable.innerHTML = "";
     if (itemRange == 20 || currentPage == 1) {
         for (var i = 0; i < itemRange; i++) {
@@ -781,7 +783,6 @@ for (var i = 1; i <= paginationCount - 1; i++) {
     });
 }
 
-
 var next = document.createElement("button");
 next.className = "nav next-button";
 next.textContent = "Next";
@@ -804,5 +805,29 @@ next.addEventListener("click", () => {
     idIndex.click();
 });
 
+var firstItem = document.getElementById("item-1")
+var indexes = document.querySelectorAll(".pagination-index");
+var lasItem = indexes[indexes.length - 1];
 
+currentPage == 1 ? function () {
+    firstItem.click();
+    prev.style.visibility = "hidden"
+}() : "";
+
+window.addEventListener("click", function () {
+    currentPage == 1 ? function () {
+        firstItem.click();
+        prev.style.visibility = "hidden";
+    }() : currentPage > 1 ? function () {
+        prev.style.visibility = "visible"
+    }() : null;
+
+
+    currentPage == indexes.length ? function () {
+        console.log(currentPage)
+        next.style.display = "none";
+    }() : function () {
+        next.style.display = "block";
+    }()
+})
 
