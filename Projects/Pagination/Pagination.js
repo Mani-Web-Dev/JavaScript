@@ -720,9 +720,6 @@ var currentPage = 1;
 var paginationCount = employees.length / 20;
 
 var pagination = document.querySelector("#pagination");
-console.log(pagination);
-
-
 
 function updateList(arr) {
     var itemRange = currentPage * 20;
@@ -752,7 +749,6 @@ function updateList(arr) {
     }
 }
 var getTableData = updateList.bind(this, employees);
-
 getTableData();
 
 var prev = document.createElement("button");
@@ -830,4 +826,3 @@ window.addEventListener("click", function () {
         next.style.display = "block";
     }()
 })
-
