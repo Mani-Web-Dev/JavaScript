@@ -1,3 +1,3 @@
-var a = $("ul.list li");
 
-console.log(a)
+var g = G$("John", "Doe");
+g.greet().setLang("es").greet(true);

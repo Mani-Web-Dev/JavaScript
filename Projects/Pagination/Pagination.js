@@ -820,7 +820,6 @@ window.addEventListener("click", function () {
 
 
     currentPage == indexes.length ? function () {
-        console.log(currentPage)
         next.style.display = "none";
     }() : function () {
         next.style.display = "block";
