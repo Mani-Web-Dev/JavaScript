@@ -3,7 +3,6 @@
 
 function user(name, age, city) {
 
-
     name = name || "Mani"
     age = age || "27"
     city = city || "Bangalore"
