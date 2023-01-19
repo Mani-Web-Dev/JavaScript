@@ -9,8 +9,8 @@ var noData = document.querySelector(".no-data");
 var getLatestData = JSON.parse(localStorage.getItem("todoListData"));
 
 if (getLatestData) {
-    console.log("Data Present in the local storage");
 
+    console.log("Data Present in the local storage");
 
     console.log(getLatestData)
 
