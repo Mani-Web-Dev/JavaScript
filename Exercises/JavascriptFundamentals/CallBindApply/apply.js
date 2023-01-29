@@ -20,3 +20,5 @@ var logPersonName = function (greet) {
 
 logPersonName.apply(person, ["Hi"]);
 // apply method is mostly useful while doing mathematical calculations
+
+
