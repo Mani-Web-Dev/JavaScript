@@ -11,27 +11,34 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+
     <link rel="stylesheet" href="./TodoList.css">
 </head>
 
 <body>
-    <div class="todo-wrapper">
-        <form class="input-wrapper" id="todoForm">
-            <input type="text" placeholder="Add a Task" id="textInput" />
-            <button type="submit" class="add"><i class="fas fa-plus"></i> Add</button>
+    <div class="container w-1/2 mt-10 mx-auto">
+        <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
+
+        <form class="mb-4">
+            <input class="border border-gray-400 p-2 w-full mb-2" type="text" placeholder="Add a new task">
+            <button class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600" type="submit">Add</button>
         </form>
-        <div class="content-wrapper">
-            <ul class="list" id="listData">
-                <!-- <li>
-                    <span><span class="index">1.</span> Go to college</span>
-                    <button class="list-button edit"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                    <button class="list-button delete"><i class="fa-solid fa-trash-can"></i> Delete</button>
-                </li> -->
-            </ul>
-        </div>
+
+        <ul class="text-left">
+            <li class="border border-gray-400 p-2 my-2 flex items-center">
+                <input class="mr-2" type="checkbox">
+                <span class="text-gray-700">Task 1</span>
+                <button class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 ml-auto">Delete</button>
+            </li>
+            <li class="border border-gray-400 p-2 my-2 flex items-center">
+                <input class="mr-2" type="checkbox">
+                <span class="text-gray-700">Task 2</span>
+                <button class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 ml-auto">Delete</button>
+            </li>
+        </ul>
     </div>
     <script src="./TodoList.js"></script>
-    <script src="../../Exercises/JavascriptFundamentals/localStorage.js"></script>
 </body>
 
 
