@@ -1,22 +1,47 @@
 var TodoForm = document.querySelector("#TodoForm");
 var TextInput = document.querySelector("#TextInput");
-var ListData = document.querySelector("#ListData");
+var ListData = document.querySelector("#AllListData");
 var NoData = document.querySelector("#NoData");
 var JsonPreview = document.querySelector("#JsonPreview");
+var Status = document.querySelector("#Status");
+
+function openTodo(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+
+
+Status.style.visibility = "hidden";
+
+TextInput.focus();
 
 // On submitting the form
 
+// get the to-do list data from local storage or create an empty array if it's not present
 var localStorageArray = JSON.parse(localStorage.getItem("todoListData"));
-
 if (localStorageArray === null) {
-    console.log("data not present");
     localStorage.setItem("todoListData", JSON.stringify([]))
 }
 
-var getData = localStorageArray;
+// Get the latest to-do list data
+var getData = JSON.parse(localStorage.getItem("todoListData"));
 
+// Function to create an element for each item in the to-do list
 function createElement(arr) {
-    arr.map((item) => {
+    arr.forEach((item) => {
         var listNode = document.createElement("li");
         var deleteButton = document.createElement("button");
         var editButton = document.createElement("button");
@@ -27,15 +52,19 @@ function createElement(arr) {
         editButton.innerText = "Edit";
         editButton.className = "bg-blue-500 text-white p-2 rounded-full hover:bg-blue-900 ml-auto";
 
+        // Event listener for delete button
         deleteButton.addEventListener("click", () => {
-            var deletedArray = getData.filter(listItem => listItem.id !== item.id)
+            var deletedArray = getData.filter(listItem => listItem.id !== item.id);
             console.log(deletedArray);
             localStorage.setItem("todoListData", JSON.stringify(deletedArray));
-            alert("Are you sure u want to create this todo?")
-            window.location.reload();
+
+            var confirm = window.confirm("Are you sure u want to create this todo?");
+            confirm ? window.location.reload() : null;
         });
 
+        // Event listener for edit button
         editButton.addEventListener("click", () => {
+            Status.style.visibility = "visible";
             console.log("Edit Button Clicked");
             var editableInput = document.createElement("input");
             editableInput.type = "text";
@@ -51,19 +80,21 @@ function createElement(arr) {
 
             editableInput.focus();
 
+            // Event listener for save button
             saveButton.addEventListener("click", () => {
-                console.log(item);
-                console.log("you have changed: from", item.taskItem, " to ", editableInput.value);
+                var index = arr.indexOf(item);
                 getData[index].taskItem = editableInput.value;
-                console.log(getData);
+                getData[index].status = Status.value;
+
                 localStorage.setItem("todoListData", JSON.stringify(getData));
-                alert("Are you sure u want to edit this todo?")
-                window.location.reload();
+                var confirm = window.confirm("Are you sure u want to edit this todo?")
+                confirm ? window.location.reload() : editableInput.focus();
             });
 
         });
 
         var index = arr.indexOf(item) + 1;
+
         listNode.innerText = index + ") " + item.taskItem;
         listNode.className = "border border-gray-400 p-2 my-2 flex items-center";
         ListData.appendChild(listNode);
@@ -71,8 +102,6 @@ function createElement(arr) {
         listNode.appendChild(deleteButton);
     })
 }
-
-
 
 var putData;
 
@@ -88,20 +117,24 @@ JsonPreview.innerText = localStorage.getItem("todoListData");
 
 TodoForm.addEventListener("submit", (event) => {
 
-    // event.preventDefault();
+    event.preventDefault();
+    console.log(putData);
 
-    putData.push({
-        id: putData.length + 1,
-        taskItem: TextInput.value
-    });
-
-    localStorage.setItem("todoListData", JSON.stringify(putData));
+    if (TextInput.value === "") {
+        alert("Please enter some value");
+    } else {
+        putData.push({
+            id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+            taskItem: TextInput.value,
+            status: Status.value,
+        });
+        localStorage.setItem("todoListData", JSON.stringify(putData));
+    }
 
 
     TextInput.value = "";
     JsonPreview.innerText = localStorage.getItem("todoListData");
 });
-
 
 
 

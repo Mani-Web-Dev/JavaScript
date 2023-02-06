@@ -23,16 +23,48 @@
         <form class="mb-4" id="TodoForm">
             <input class="border border-gray-400 p-2 w-full mb-2" type="text" placeholder="Add a new task"
                 id="TextInput">
-            <button class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600" type="submit">Add</button>
+            <div class="flex">
+                <button class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600" type="submit">Add</button>
+
+                <select id="Status"
+                    class="ml-auto block bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="To-Do">To-Do</option>
+                    <option value="Under Progress">Under Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+            </div>
         </form>
 
-        <ul class="text-left" id="ListData">
+        <div class="tab">
+            <button class="tablinks" onclick="openTodo(event, 'AllListData')" id="defaultOpen">All ToDos</button>
+            <button class="tablinks" onclick="openTodo(event, 'UnderProgressData')">Under Progress</button>
+            <button class="tablinks" onclick="openTodo(event, 'CompletedData')">Completed</button>
+        </div>
+
+        <div id="AllListData" class="tabcontent">
+            <h2 class="font-bold">All List</h2>
+        </div>
+
+        <div id="UnderProgressData" class="tabcontent">
+            <h2 class="font-bold">Under Progress</h2>
+        </div>
+
+        <div id="CompletedData" class="tabcontent">
+            <h2 class="font-bold">Completed</h2>
+        </div>
+
+
+        <ul class="text-left" id="AllListData">
             <!-- <li class="border border-gray-400 p-2 my-2 flex items-center">
                 <input class="mr-2" type="checkbox">
                 <span class="text-gray-700">Task 1</span>
                 <button class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 ml-auto">Delete</button>
             </li> -->
         </ul>
+
+
+
 
         <div class="bg-gray-600 mt-10 text-white p-2 h-48 overflow-y-auto" id="JsonPreview"></div>
     </div>
