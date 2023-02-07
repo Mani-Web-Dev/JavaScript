@@ -91,13 +91,24 @@ let gmAction = () => {
 // Reducer is a pure function,
 // Pure function will not have side effects
 // Reducer takes two arguements i.e initialState, action
+// In redux, the reducers are the pure functions that contain the logic and calculation that needed to be performed on the state. These functions accept the initial state of the state being used and the action type. It updates the state and responds with the new state.
 
 // Reducer is going to update or create a store based on the action type
 
 let messageReducer = (state, action) => {
     // update store/state based on the action type
-
 }
+(state, action) => newState
+
+// They should only calculate the new state value based on the state and action arguments
+
+// They are not allowed to modify the existing state.Instead, they must make immutable updates, by copying the existing state and making changes to the copied values.
+
+// They must not do any asynchronous logic, calculate random values, or cause other "side effects"
+
+
+
+
 
 // Store
 // Store is a centralized object that contains the state of an application 
@@ -113,6 +124,10 @@ export { store };
  * react-redux => Provider, useDispatch, useSelector
  * redux-devtools-extension => composeWithDevtools() -> to debug the redux store
  */
+
+
+
+
 
 
 // useSelector is part for "react-redux" package
