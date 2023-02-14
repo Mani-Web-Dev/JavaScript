@@ -1,6 +1,8 @@
 var TodoForm = document.querySelector("#TodoForm");
 var TextInput = document.querySelector("#TextInput");
 var ListData = document.querySelector("#AllListData");
+var UnderProgressData = document.querySelector("#UnderProgressData");
+var CompletedData = document.querySelector("#CompletedData");
 var NoData = document.querySelector("#NoData");
 var JsonPreview = document.querySelector("#JsonPreview");
 var Status = document.querySelector("#Status");
@@ -22,8 +24,6 @@ function openTodo(evt, cityName) {
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 
-
-
 Status.style.visibility = "hidden";
 
 TextInput.focus();
@@ -31,17 +31,19 @@ TextInput.focus();
 // On submitting the form
 
 // get the to-do list data from local storage or create an empty array if it's not present
-var localStorageArray = JSON.parse(localStorage.getItem("todoListData"));
-if (localStorageArray === null) {
-    localStorage.setItem("todoListData", JSON.stringify([]))
-}
+var localStorageArray = JSON.parse(localStorage.getItem("todoListData")) || localStorage.setItem("todoListData", JSON.stringify([]));
+var underProgress = JSON.parse(localStorage.getItem("underProgress")) || localStorage.setItem("underProgress", JSON.stringify([]));
+var completed = JSON.parse(localStorage.getItem("completed")) || localStorage.setItem("completed", JSON.stringify([]));
+
 
 // Get the latest to-do list data
 var getData = JSON.parse(localStorage.getItem("todoListData"));
 
+
 // Function to create an element for each item in the to-do list
-function createElement(arr) {
+function createElement(arr, status) {
     arr.forEach((item) => {
+
         var listNode = document.createElement("li");
         var deleteButton = document.createElement("button");
         var editButton = document.createElement("button");
@@ -58,7 +60,7 @@ function createElement(arr) {
             console.log(deletedArray);
             localStorage.setItem("todoListData", JSON.stringify(deletedArray));
 
-            var confirm = window.confirm("Are you sure u want to create this todo?");
+            var confirm = window.confirm("Are you sure u want to delete this todo?");
             confirm ? window.location.reload() : null;
         });
 
@@ -87,6 +89,20 @@ function createElement(arr) {
                 getData[index].status = Status.value;
 
                 localStorage.setItem("todoListData", JSON.stringify(getData));
+
+                console.log(getData[index]);
+
+                var completedData = [];
+                if (getData[index].status === "Completed") {
+                    completedData.push(getData[index]);
+                    localStorage.setItem("completed", JSON.stringify(completedData));
+                }
+
+                var inProgressData = [];
+                if (getData[index].status === "Under Progress") {
+                    inProgressData.push(getData[index]);
+                    localStorage.setItem("underProgress", JSON.stringify(inProgressData));
+                }
                 var confirm = window.confirm("Are you sure u want to edit this todo?")
                 confirm ? window.location.reload() : editableInput.focus();
             });
@@ -97,11 +113,25 @@ function createElement(arr) {
 
         listNode.innerText = index + ") " + item.taskItem;
         listNode.className = "border border-gray-400 p-2 my-2 flex items-center";
-        ListData.appendChild(listNode);
+
+
+        ListData.appendChild(listNode)
         listNode.appendChild(editButton);
         listNode.appendChild(deleteButton);
+
+        // status === "alltasks" ?
+        //      :
+        //     status === "underprogress" ?
+        //         UnderProgressData.appendChild(listNode) :
+        //         status === "completed" ?
+        //             completed.appendChild(listNode) : null
+
+
     })
 }
+
+
+
 
 var putData;
 
@@ -111,13 +141,28 @@ getData === null ? putData = [] : putData = [...getData];
 
 
 var getLatestData = createElement.bind(this, getData);
-getLatestData();
+// var getUnderProgressData = createElement.bind(this, underProgress);
+// var getCompletedData = createElement.bind(this, completed);
+
+
+function noData(targetNode, description) {
+    var noData = document.createElement("p");
+    noData.textContent = description;
+    noData.className = "border border-gray-400 p-3 mt-5";
+    targetNode.appendChild(noData);
+}
+
+getData.length === 0 ? noData(ListData, "You have not created any tasks yet!") : getLatestData("alltasks");
+// underProgress.length === 0 ? noData(UnderProgressData, "No tasks are under progress") : getLatestData("underprogress");
+// completed.length === 0 ? noData(CompletedData, "You have not completed any tasks yet!") : getLatestData("completed");
+
+
 
 JsonPreview.innerText = localStorage.getItem("todoListData");
 
 TodoForm.addEventListener("submit", (event) => {
 
-    event.preventDefault();
+    // event.preventDefault();
     console.log(putData);
 
     if (TextInput.value === "") {
