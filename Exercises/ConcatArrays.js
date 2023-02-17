@@ -10,3 +10,4 @@ function mergeArrays(...args) {
 
 var output = mergeArrays([1, 6], [2, 5], [3, 9], [4, 50, 50]);
 console.log(output);
+
